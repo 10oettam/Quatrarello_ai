@@ -271,51 +271,19 @@
 
   prevBtn.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-    updateCarousel();
   });
 
   nextBtn.addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % totalImages;
-    updateCarousel();
   });
 
   // Initialize carousel position
-  updateCarousel();
 
   // Optional: swipe support for mobile devices
   let startX = 0;
   let isDragging = false;
 
-  carouselInner.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    isDragging = true;
-  });
-
-  carouselInner.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    const currentX = e.touches[0].clientX;
-    const diffX = currentX - startX;
-    // Prevent horizontal scroll if swiping horizontally
-    if (Math.abs(diffX) > 10) {
-      e.preventDefault();
-    }
-  }, { passive: false });
-
-  carouselInner.addEventListener('touchend', e => {
-    if (!isDragging) return;
-    const endX = e.changedTouches[0].clientX;
-    const diffX = endX - startX;
-    if (diffX > 50) {
-      // Swipe right - previous image
-      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-      updateCarousel();
-    } else if (diffX < -50) {
-      // Swipe left - next image
-      currentIndex = (currentIndex + 1) % totalImages;
-      updateCarousel();
-    }
-    isDragging = false;
-  });
+  
 </script>
 </body>
 </html>
